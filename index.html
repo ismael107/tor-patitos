@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Ilegal de Patitos</title>
+    <style>
+        h1 {
+            color: #00FF00;
+        }
+        body {
+            background: black;
+        }
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: auto;
+        }
+        table, th, td {
+            border: 1px solid #00FF00; /* Verde fosforito */
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            color: #FFFF00; /* Amarillo */
+        }
+        th {
+            background-color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tienda Ilegal de Patitos de Goma</h1>
+    <div id="table-container"></div>
+    <script>
+        // Datos de los patitos de goma
+        const patitos = [
+            { modelo: "Patito Clásico", precio: "$5", caracteristicas: "caracteristicas1.pdf" },
+            { modelo: "Patito Ninja", precio: "$7", caracteristicas: "caracteristicas2.pdf" },
+            { modelo: "Patito Pirata", precio: "$6", caracteristicas: "caracteristicas3.pdf" },
+            { modelo: "Patito Espía", precio: "$8", caracteristicas: "caracteristicas4.pdf" },
+            { modelo: "Patito de Lujo", precio: "$10", caracteristicas: "caracteristicas5.pdf" },
+            { modelo: "Patito Retro", precio: "$5", caracteristicas: "caracteristicas6.pdf" },
+            { modelo: "Patito Espacial", precio: "$9", caracteristicas: "caracteristicas7.pdf" },
+            { modelo: "Patito Deportivo", precio: "$6", caracteristicas: "caracteristicas8.pdf" },
+            { modelo: "Patito Samurai", precio: "$8", caracteristicas: "caracteristicas9.pdf" },
+            { modelo: "Patito Fantasía", precio: "$7", caracteristicas: "caracteristicas10.pdf" }
+        ];
+
+        // Crear la tabla
+        const table = document.createElement('table');
+
+        // Crear el encabezado de la tabla
+        const header = document.createElement('tr');
+        const headers = ['Modelo', 'Precio', 'Características'];
+        headers.forEach(headerText => {
+            const th = document.createElement('th');
+            th.textContent = headerText;
+            header.appendChild(th);
+        });
+        table.appendChild(header);
+
+        // Crear las filas de la tabla
+        patitos.forEach(patito => {
+            const row = document.createElement('tr');
+            
+            const cellModelo = document.createElement('td');
+            cellModelo.textContent = patito.modelo;
+            row.appendChild(cellModelo);
+            
+            const cellPrecio = document.createElement('td');
+            cellPrecio.textContent = patito.precio;
+            row.appendChild(cellPrecio);
+
+            const cellCaracteristicas = document.createElement('td');
+            const link = document.createElement('a');
+            link.href = patito.caracteristicas;
+            link.textContent = 'Descargar';
+            link.style.color = '#FFFF00'; // Amarillo
+            cellCaracteristicas.appendChild(link);
+            row.appendChild(cellCaracteristicas);
+
+            table.appendChild(row);
+        });
+
+        // Insertar la tabla en el contenedor
+        document.getElementById('table-container').appendChild(table);
+    </script>
+</body>
+</html>
+
