@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  tor:
+    image: lncm/tor:0.4.7.9
+    container_name: tor
+    volumes:
+      - ./data/torrc:/etc/tor/torrc   # Montar torrc personalizado
+      - ./data:/var/lib/tor           # Montar datos de Tor
+      - ./run:/var/run/tor            # Montar directorio de ejecución de Tor
+    environment:
+      - TOR_SERVICE_PORT=80           # Puerto del servicio oculto
+      - TOR_CONTROL_PORT=9051         # Puerto de control de Tor
+    restart: on-failure
+    networks:
+      - tor-network
+    stop_grace_period: 10m30s
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html
+    networks:
+      - tor-network
+
+networks:
+  tor-network:
+    driver: bridge
+
